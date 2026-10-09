@@ -12,4 +12,13 @@ router.get("/", (req, res) => {
   });
 });
 
+router.post("/create", (req, res) => {
+  const response = peliculasController.crear(req.body);
+
+  res.status(response.status).json({
+    data: response.data,
+    message: response.message,
+  });
+});
+
 export default router;

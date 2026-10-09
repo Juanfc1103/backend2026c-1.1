@@ -1,4 +1,5 @@
 import { peliculas } from "../database/db.js";
+import { v4 as uuidv4 } from "uuid";
 
 class PeliculasController {
   mostrarPeliculas() {
@@ -14,6 +15,31 @@ class PeliculasController {
       status: 200,
       data: peliculas,
       message: "Películas listadas exitosamente",
+    };
+  }
+
+  crear(newPelicula) {
+    if (
+      !newPelicula ||
+      !newPelicula.titulo ||
+      !newPelicula.genero ||
+      !newPelicula.duracion
+    ) {
+      return {
+        status: 400,
+        data: null,
+        message: "Faltan datos indispensables de la película",
+      };
+    }
+
+    newPelicula.id = uuidv4();
+
+    peliculas.push(newPelicula);
+
+    return {
+      status: 201,
+      data: newPelicula,
+      message: "Película agregada exitosamente",
     };
   }
 }
