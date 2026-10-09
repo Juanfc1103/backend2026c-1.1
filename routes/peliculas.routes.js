@@ -1,9 +1,15 @@
 import express from "express";
+import peliculasController from "../controllers/peliculas.controller.js";
+
 const router = express.Router();
 
-/* GET peliculas listing. */
-router.get("/", function (req, res, next) {
-  res.send("respond with a resource");
+router.get("/", (req, res) => {
+  const response = peliculasController.mostrarPeliculas();
+
+  res.status(response.status).json({
+    data: response.data,
+    message: response.message,
+  });
 });
 
 export default router;
