@@ -38,6 +38,51 @@ class FuncionesController {
       message: "Función agregada exitosamente",
     };
   }
+
+  actualizar(newFuncion, idFuncion) {
+    for (let i = 0; i < funciones.length; i++) {
+      if (funciones[i].id === idFuncion) {
+        funciones[i].peliculaId = newFuncion.peliculaId
+          ? newFuncion.peliculaId
+          : funciones[i].peliculaId;
+        funciones[i].salaId = newFuncion.salaId
+          ? newFuncion.salaId
+          : funciones[i].salaId;
+        funciones[i].horario = newFuncion.horario
+          ? newFuncion.horario
+          : funciones[i].horario;
+
+        return {
+          status: 201,
+          data: funciones[i],
+          message: "Función actualizada exitosamente",
+        };
+      }
+    }
+    return {
+      status: 400,
+      data: null,
+      message: "Función no encontrada",
+    };
+  }
+
+  eliminar(idFuncion) {
+    for (let i = 0; i < funciones.length; i++) {
+      if (funciones[i].id === idFuncion) {
+        funciones.splice(i, 1);
+        return {
+          status: 200,
+          data: funciones,
+          message: "Función eliminada exitosamente",
+        };
+      }
+    }
+    return {
+      status: 400,
+      data: null,
+      message: "Función no encontrada",
+    };
+  }
 }
 
 const funcionesController = new FuncionesController();
