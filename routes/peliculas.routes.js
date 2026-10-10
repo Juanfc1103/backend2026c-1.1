@@ -21,4 +21,12 @@ router.post("/create", (req, res) => {
   });
 });
 
+router.put("/update/:id", (req, res) => {
+  const response = peliculasController.actualizar(req.body, req.params.id);
+  res.status(response.status).json({
+    data: response.data,
+    message: response.message,
+  });
+});
+
 export default router;
