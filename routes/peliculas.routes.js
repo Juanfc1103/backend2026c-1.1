@@ -29,4 +29,12 @@ router.put("/update/:id", (req, res) => {
   });
 });
 
+router.delete("/delete/:id", (req, res) => {
+  const response = peliculasController.eliminar(req.params.id);
+  res.status(response.status).json({
+    data: response.data,
+    message: response.message,
+  });
+});
+
 export default router;

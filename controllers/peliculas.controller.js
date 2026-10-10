@@ -70,6 +70,26 @@ class PeliculasController {
       message: "Película no encontrada",
     };
   }
+
+  eliminar(idPel) {
+    for (let i = 0; i < peliculas.length; i++) {
+      if (peliculas[i].id === idPel) {
+        peliculas.splice(i, 1);
+
+        return {
+          status: 200,
+          data: peliculas,
+          message: "Película eliminada exitosamente",
+        };
+      }
+    }
+
+    return {
+      status: 400,
+      data: null,
+      message: "Película no encontrada",
+    };
+  }
 }
 
 const peliculasController = new PeliculasController();
