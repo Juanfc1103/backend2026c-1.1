@@ -17,6 +17,22 @@ class TicketsController {
     };
   }
 
+  buscarPorId(idTicket) {
+    const ticket = tickets.find((t) => t.id === idTicket);
+    if (!ticket) {
+      return {
+        status: 404,
+        data: null,
+        message: "Ticket no encontrado",
+      };
+    }
+    return {
+      status: 200,
+      data: ticket,
+      message: "Ticket encontrado exitosamente",
+    };
+  }
+
   crear(newTicket) {
     if (
       !newTicket ||

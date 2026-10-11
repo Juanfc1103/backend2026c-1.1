@@ -10,6 +10,28 @@ router.get("/", (req, res) => {
     .json({ data: response.data, message: response.message });
 });
 
+router.get("/busqueda/fecha", (req, res) => {
+  const { inicio, fin } = req.query;
+  const response = reservacionesController.porRangoDeFecha(inicio, fin);
+  res
+    .status(response.status)
+    .json({ data: response.data, message: response.message });
+});
+
+router.get("/:id", (req, res) => {
+  const response = reservacionesController.buscarPorId(req.params.id);
+  res
+    .status(response.status)
+    .json({ data: response.data, message: response.message });
+});
+
+router.delete("/delete-relation/:id/ticket", (req, res) => {
+  const response = reservacionesController.eliminarRelacionTicket(req.params.id);
+  res
+    .status(response.status)
+    .json({ data: response.data, message: response.message });
+});
+
 router.post("/create", (req, res) => {
   const response = reservacionesController.crear(req.body);
   res

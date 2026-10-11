@@ -17,6 +17,22 @@ class FuncionesController {
     };
   }
 
+  buscarPorId(idFuncion) {
+    const funcion = funciones.find((f) => f.id === idFuncion);
+    if (!funcion) {
+      return {
+        status: 404,
+        data: null,
+        message: "Función no encontrada",
+      };
+    }
+    return {
+      status: 200,
+      data: funcion,
+      message: "Función encontrada exitosamente",
+    };
+  }
+
   crear(newFuncion) {
     if (
       !newFuncion ||

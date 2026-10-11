@@ -18,6 +18,38 @@ class PeliculasController {
     };
   }
 
+  buscarPorId(idPel) {
+    const pelicula = peliculas.find((p) => p.id === idPel);
+    if (!pelicula) {
+      return {
+        status: 404,
+        data: null,
+        message: "Película no encontrada",
+      };
+    }
+    return {
+      status: 200,
+      data: pelicula,
+      message: "Película encontrada exitosamente",
+    };
+  }
+
+  ultimas5() {
+    if (peliculas.length === 0) {
+      return {
+        status: 200,
+        data: null,
+        message: "No hay películas registradas",
+      };
+    }
+    const ultimas = peliculas.slice(-5);
+    return {
+      status: 200,
+      data: ultimas,
+      message: "Últimas 5 películas obtenidas exitosamente",
+    };
+  }
+
   crear(newPelicula) {
     if (
       !newPelicula ||

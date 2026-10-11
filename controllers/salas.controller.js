@@ -17,6 +17,22 @@ class SalasController {
     };
   }
 
+  buscarPorId(idSala) {
+    const sala = salas.find((s) => s.id === idSala);
+    if (!sala) {
+      return {
+        status: 404,
+        data: null,
+        message: "Sala no encontrada",
+      };
+    }
+    return {
+      status: 200,
+      data: sala,
+      message: "Sala encontrada exitosamente",
+    };
+  }
+
   crear(newSala) {
     if (!newSala || !newSala.nombre || !newSala.capacidad) {
       return {

@@ -17,6 +17,56 @@ class ReservacionesController {
     };
   }
 
+  buscarPorId(idReservacion) {
+    const reservacion = reservaciones.find((r) => r.id === idReservacion);
+    if (!reservacion) {
+      return {
+        status: 404,
+        data: null,
+        message: "Reservación no encontrada",
+      };
+    }
+    return {
+      status: 200,
+      data: reservacion,
+      message: "Reservación encontrada exitosamente",
+    };
+  }
+
+  porRangoDeFecha(fechaInicio, fechaFin) {
+    const filtradas = reservaciones.filter((r) => {
+      const fechaR = new Date(r.fecha);
+      const inicio = new Date(fechaInicio);
+      const fin = new Date(fechaFin);
+      return fechaR >= inicio && fechaR <= fin;
+    });
+
+    return {
+      status: 200,
+      data: filtradas,
+      message: "Reservaciones filtradas por fecha exitosamente",
+    };
+  }
+
+  eliminarRelacionTicket(idReservacion) {
+    const reservacion = reservaciones.find((r) => r.id === idReservacion);
+    if (!reservacion) {
+      return {
+        status: 404,
+        data: null,
+        message: "Reservación no encontrada",
+      };
+    }
+    
+    delete reservacion.ticketId;
+
+    return {
+      status: 200,
+      data: reservacion,
+      message: "Relación con el ticket eliminada exitosamente",
+    };
+  }
+
   crear(newReservacion) {
     if (
       !newReservacion ||

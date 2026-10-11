@@ -12,6 +12,24 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/grupo/ultimas5", (req, res) => {
+  const response = peliculasController.ultimas5();
+
+  res.status(response.status).json({
+    data: response.data,
+    message: response.message,
+  });
+});
+
+router.get("/:id", (req, res) => {
+  const response = peliculasController.buscarPorId(req.params.id);
+
+  res.status(response.status).json({
+    data: response.data,
+    message: response.message,
+  });
+});
+
 router.post("/create", (req, res) => {
   const response = peliculasController.crear(req.body);
 

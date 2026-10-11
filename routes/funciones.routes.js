@@ -10,6 +10,13 @@ router.get("/", (req, res) => {
     .json({ data: response.data, message: response.message });
 });
 
+router.get("/:id", (req, res) => {
+  const response = funcionesController.buscarPorId(req.params.id);
+  res
+    .status(response.status)
+    .json({ data: response.data, message: response.message });
+});
+
 router.post("/create", (req, res) => {
   const response = funcionesController.crear(req.body);
   res
