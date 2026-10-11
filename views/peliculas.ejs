@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1>Gestión de <%= title %></h1>
+    <% if (peliculas.length === 0) { %>
+      <p>No hay películas registradas.</p>
+    <% } else { %>
+      <ul>
+        <% peliculas.forEach(p => { %>
+          <li><strong><%= p.titulo %></strong> - <%= p.genero %> (<%= p.duracion %> min)</li>
+        <% }) %>
+      </ul>
+    <% } %>
+    <a href="/">Volver al Inicio</a>
+  </body>
+</html>
